@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: slack-drive-claude-bot
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SLACK_BOT_TOKEN
+        sync: false
+      - key: SLACK_SIGNING_SECRET
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GOOGLE_DRIVE_FOLDER_ID
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false

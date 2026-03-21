@@ -1,0 +1,22 @@
+{
+  "name": "slack-drive-claude-bot",
+  "version": "1.0.0",
+  "description": "Slack bot that answers questions using Google Drive docs via Claude",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.27.0",
+    "@slack/bolt": "^3.17.0",
+    "dotenv": "^16.3.1",
+    "googleapis": "^140.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
