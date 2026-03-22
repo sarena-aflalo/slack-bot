@@ -53,6 +53,8 @@ async function listFilesInFolder(drive, folderId) {
     fields: 'files(id, name, mimeType, webViewLink)',
     pageSize: 20,
     orderBy: 'modifiedTime desc',
+    supportsAllDrives: true,
+    includeItemsFromAllDrives: true,
   });
   return res.data.files || [];
 }
@@ -64,6 +66,8 @@ async function fullTextSearch(drive, folderId, query) {
       q: `'${folderId}' in parents and fullText contains '${safeQuery}' and trashed = false`,
       fields: 'files(id, name, mimeType, webViewLink)',
       pageSize: MAX_DOCS,
+      supportsAllDrives: true,
+      includeItemsFromAllDrives: true,
     });
     return res.data.files || [];
   } catch {
@@ -82,7 +86,7 @@ async function getFileContent(drive, file) {
           : 'text/plain';
 
       const res = await drive.files.export(
-        { fileId: file.id, mimeType: exportMime },
+        { fileId: file.id, mimeType: exportMime, supportsAllDrives: true },
         { responseType: 'text' }
       );
       return String(res.data);
@@ -90,7 +94,7 @@ async function getFileContent(drive, file) {
 
     if (DOWNLOADABLE_TEXT_TYPES.has(file.mimeType)) {
       const res = await drive.files.get(
-        { fileId: file.id, alt: 'media' },
+        { fileId: file.id, alt: 'media', supportsAllDrives: true },
         { responseType: 'text' }
       );
       return String(res.data);
