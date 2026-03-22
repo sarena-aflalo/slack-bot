@@ -83,6 +83,7 @@ async function createSlackApp() {
 
   // Handle direct messages
   app.event('message', async ({ event, say, client }) => {
+    console.log('message event received:', JSON.stringify({ channel_type: event.channel_type, bot_id: event.bot_id, subtype: event.subtype, text: event.text }));
     if (event.channel_type !== 'im' || event.bot_id) return;
     await handleQuestion(event.text || '', event.channel, event.ts, say, client);
   });
